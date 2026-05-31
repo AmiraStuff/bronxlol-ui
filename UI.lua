@@ -4512,7 +4512,7 @@ for Index, Value in pairs(Library.OpenFrames) do
 
             local Items = { } do
                 Items["Inactive"] = Instances:Create("TextButton", {
-                    Parent = Page.Page.Items["SubPages"].Instance,
+                    Parent = Page.Page.Items["SubPages"] and Page.Page.Items["SubPages"].Instance or Page.Page.Items["Page"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(47, 84, 176),
