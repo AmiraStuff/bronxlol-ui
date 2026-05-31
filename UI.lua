@@ -4212,7 +4212,7 @@ for Index, Value in pairs(Library.OpenFrames) do
                     Items["MainFrame"]:Tween(nil, {Position = UDim2New(0, 0, 0, 0)})
                 else
                     Items["MainFrame"]:Tween(nil, {Size = UDim2New(0, OldSize.X, 0, OldSize.Y)})
-                    Items["MainFrame"]:Tween(nil, {Position = UDim2New(0, math.max(10, ViewportWidth / 2 - OldSize.X / 2), 0, math.max(10, ViewportHeight / 2 - OldSize.Y / 2)})
+                    Items["MainFrame"]:Tween(nil, {Position = UDim2New(0, math.max(10, ViewportWidth / 2 - OldSize.X / 2), 0, math.max(10, ViewportHeight / 2 - OldSize.Y / 2))})
                 end
             end)
 
