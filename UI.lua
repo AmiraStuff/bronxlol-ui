@@ -3977,10 +3977,20 @@ for Index, Value in pairs(Library.OpenFrames) do
                     Position = UDim2New(0, 8, 1, -8),
                     BorderColor3 = FromRGB(0, 0, 0),
                                         ZIndex = 2,
-                    Size = UDim2New(0, 185, 0, 40),
+                    Size = UDim2New(0, SidebarWidth - 8, 0, 0),
+                    AutomaticSize = Enum.AutomaticSize.Y,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(26, 24, 31)
                 })  Items["UserInfo"]:AddToTheme({BackgroundColor3 = "Inline"})
+
+                Instances:Create("UIPadding", {
+                    Parent = Items["UserInfo"].Instance,
+                    Name = "\0",
+                    PaddingTop = UDimNew(0, 6),
+                    PaddingBottom = UDimNew(0, 6),
+                    PaddingRight = UDimNew(0, 8),
+                    PaddingLeft = UDimNew(0, 8)
+                })
 
                 Instances:Create("UICorner", {
                     Parent = Items["UserInfo"].Instance,
@@ -3992,10 +4002,10 @@ for Index, Value in pairs(Library.OpenFrames) do
                     Parent = Items["UserInfo"].Instance,
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
-                    AnchorPoint = Vector2New(0, 0.5),
+                    AnchorPoint = Vector2New(0, 0),
                     Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420),
-                    Position = UDim2New(0, 8, 0.5, 0),
-                    Size = UDim2New(0, 28, 0, 28),
+                    Position = UDim2New(0, 0, 0, 0),
+                    Size = UDim2New(0, 24, 0, 24),
                                         ZIndex = 2,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(15, 14, 18)
@@ -4004,7 +4014,16 @@ for Index, Value in pairs(Library.OpenFrames) do
                 Instances:Create("UICorner", {
                     Parent = Items["Avatar"].Instance,
                     Name = "\0",
-                    CornerRadius = UDimNew(0, 5)
+                    CornerRadius = UDimNew(0, 4)
+                })
+
+                Instances:Create("UIListLayout", {
+                    Parent = Items["UserInfo"].Instance,
+                    Name = "\0",
+                    FillDirection = Enum.FillDirection.Horizontal,
+                    VerticalAlignment = Enum.VerticalAlignment.Top,
+                    Padding = UDimNew(0, 8),
+                    SortOrder = Enum.SortOrder.LayoutOrder
                 })
 
                 Items["Username"] = Instances:Create("TextLabel", {
@@ -4014,13 +4033,14 @@ for Index, Value in pairs(Library.OpenFrames) do
                     TextColor3 = FromRGB(255, 255, 255),
                     BorderColor3 = FromRGB(0, 0, 0),
                     Text = LocalPlayer.Name,
-                    AnchorPoint = Vector2New(0, 0.5),
-                    Size = UDim2New(0, 0, 0, 15),
+                    AnchorPoint = Vector2New(0, 0),
+                    Size = UDim2New(1, 0, 0, 0),
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, 48, 0.5, 0),
+                    Position = UDim2New(0, 32, 0, 0),
                     BorderSizePixel = 0,
-                    AutomaticSize = Enum.AutomaticSize.X,
-                    TextSize = 16,
+                    AutomaticSize = Enum.AutomaticSize.Y,
+                    TextSize = 14,
+                    TextWrapped = true,
                                         ZIndex = 2,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })  Items["Username"]:AddToTheme({TextColor3 = "Text"})
