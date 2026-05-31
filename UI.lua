@@ -3814,21 +3814,21 @@ for Index, Value in pairs(Library.OpenFrames) do
             if ViewportWidth <= 400 then
                 -- Phone
                 DeviceType = "Phone"
-                WindowWidth = math.min(350, ViewportWidth - 20)
-                WindowHeight = math.min(500, ViewportHeight - 40)
-                SidebarWidth = 100
+                WindowWidth = math.min(320, ViewportWidth - 20)
+                WindowHeight = math.min(400, ViewportHeight - 40)
+                SidebarWidth = 80
             elseif ViewportWidth <= 1024 then
                 -- Tablet
                 DeviceType = "Tablet"
-                WindowWidth = math.min(750, ViewportWidth - 40)
-                WindowHeight = math.min(600, ViewportHeight - 80)
-                SidebarWidth = 140
+                WindowWidth = math.min(550, ViewportWidth - 40)
+                WindowHeight = math.min(450, ViewportHeight - 80)
+                SidebarWidth = 110
             else
                 -- PC
                 DeviceType = "PC"
-                WindowWidth = math.min(1000, ViewportWidth - 100)
-                WindowHeight = math.min(650, ViewportHeight - 100)
-                SidebarWidth = 180
+                WindowWidth = math.min(650, ViewportWidth - 100)
+                WindowHeight = math.min(500, ViewportHeight - 100)
+                SidebarWidth = 130
             end
 
             local ResizeButton
@@ -4329,11 +4329,10 @@ for Index, Value in pairs(Library.OpenFrames) do
                         BorderColor3 = FromRGB(0, 0, 0),
                         ZIndex = 2,
                         BackgroundTransparency = 1,
-                        Position = UDim2New(0.5, 0, 0, 4),
-                        AnchorPoint = Vector2New(0.5, 0),
-                        Size = UDim2New(0, 0, 0, 30),
+                        Position = UDim2New(0, 8, 0, 4),
+                        AnchorPoint = Vector2New(0, 0),
+                        Size = UDim2New(1, -16, 0, 30),
                         BorderSizePixel = 0,
-                        AutomaticSize = Enum.AutomaticSize.X,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })
 
@@ -4352,7 +4351,7 @@ for Index, Value in pairs(Library.OpenFrames) do
                         Parent = Items["SubPages"].Instance,
                         Name = "\0",
                         FillDirection = Enum.FillDirection.Horizontal,
-                        HorizontalAlignment = Enum.HorizontalAlignment.Center,
+                        HorizontalAlignment = Enum.HorizontalAlignment.Left,
                         Padding = UDimNew(0, 8),
                         SortOrder = Enum.SortOrder.LayoutOrder
                     })
@@ -4502,7 +4501,7 @@ for Index, Value in pairs(Library.OpenFrames) do
                     AutoButtonColor = false,
                     BackgroundTransparency = 1,
                     BorderSizePixel = 0,
-                    Size = UDim2New(0, 48, 1, 0),
+                    Size = UDim2New(0, 0, 1, 0),
                     ZIndex = 2,
                     TextSize = 18,
                     BackgroundColor3 = FromRGB(26, 24, 31)
@@ -4578,7 +4577,7 @@ for Index, Value in pairs(Library.OpenFrames) do
                     HorizontalFlex = Enum.UIFlexAlignment.Fill
                 })
 
-                Items["Inactive"].Instance.Size = UDim2New(0, Items["Text"].Instance.TextBounds.X + 20, 1, 0)
+                Items["Inactive"].Instance.Size = UDim2New(0, math.max(Items["Text"].Instance.TextBounds.X + 20, 50), 1, 0)
 
                 for Index = 1, Page.Columns do
                     local NewColumn = Instances:Create("ScrollingFrame", {
