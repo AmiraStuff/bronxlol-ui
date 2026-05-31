@@ -204,14 +204,14 @@ local Library do
     }
 
     -- Folders
-    for Index, Value in Library.Folders do 
+    for Index, Value in pairs(Library.Folders) do 
         if not isfolder(Value) then
             makefolder(Value)
         end
     end
 
     -- Images
-    for Index, Value in Library.Images do 
+    for Index, Value in pairs(Library.Images) do 
         local ImageData = Value
 
         local ImageName = ImageData[1]
@@ -329,7 +329,7 @@ local Library do
 
             setmetatable(NewItem, Instances)
 
-            for Property, Value in NewItem.Properties do
+            for Property, Value in pairs(NewItem.Properties) do
                 NewItem.Instance[Property] = Value
             end
 
@@ -628,11 +628,11 @@ local Library do
     })
 
     Library.Unload = function(self)
-        for Index, Value in self.Connections do 
+        for Index, Value in pairs(self.Connections) do 
             Value.Connection:Disconnect()
         end
 
-        for Index, Value in self.Threads do 
+        for Index, Value in pairs(self.Threads) do 
             coroutine.close(Value)
         end
 
@@ -701,7 +701,7 @@ local Library do
     end
 
     Library.Disconnect = function(self, Name)
-        for _, Connection in self.Connections do 
+        for _, Connection in pairs(self.Connections) do 
             if Connection.Name == Name then
                 Connection.Connection:Disconnect()
                 break
@@ -732,7 +732,7 @@ local Library do
             Properties = Properties,
         }
 
-        for Property, Value in ThemeData.Properties do
+        for Property, Value in pairs(ThemeData.Properties) do
             if type(Value) == "string" then
                 Item[Property] = self.Theme[Value]
             else
@@ -769,8 +769,8 @@ local Library do
     Library.ChangeTheme = function(self, Theme, Color)
         self.Theme[Theme] = Color
 
-        for _, Item in self.ThemeItems do
-            for Property, Value in Item.Properties do
+        for _, Item in pairs(self.ThemeItems) do
+            for Property, Value in pairs(Item.Properties) do
                 if type(Value) == "string" and Value == Theme then
                     Item.Item[Property] = Color
                 elseif type(Value) == "function" then
@@ -784,7 +784,7 @@ local Library do
         local Config = { } 
 
         local Success, Result = Library:SafeCall(function()
-            for Index, Value in Library.Flags do 
+            for Index, Value in pairs(Library.Flags) do 
                 if type(Value) == "table" and Value.Key then
                     Config[Index] = {Key = tostring(Value.Key), Mode = Value.Mode}
                 elseif type(Value) == "table" and Value.Color then
@@ -802,7 +802,7 @@ local Library do
         local Decoded = HttpService:JSONDecode(Config)
 
         local Success, Result = Library:SafeCall(function()
-            for Index, Value in Decoded do 
+            for Index, Value in pairs(Decoded) do 
                 local SetFunction = Library.SetFlags[Index]
 
                 if not SetFunction then
@@ -834,7 +834,7 @@ local Library do
 
         local ConfigFolderName = StringGSub(Library.Folders.Configs, Library.Folders.Directory .. "/", "")
 
-        for Index, Value in listfiles(Library.Folders.Configs) do
+        for Index, Value in pairs(listfiles(Library.Folders.Configs)) do
             local FileName = StringGSub(Value, Library.Folders.Directory .. "\\" .. ConfigFolderName .. "\\", "")
             List[Index] = FileName
         end
@@ -1542,7 +1542,7 @@ local Library do
                         Items["OptionHolder"].Instance.Size = UDim2New(0, Items["RealDropdown"].Instance.AbsoluteSize.X, 0, 0)
                     end)
 
-                    for Index, Value in Library.OpenFrames do
+                    for Index, Value in pairs(Library.OpenFrames) do
                         if Value ~= self and not Data.Debounce then
                             Value:SetOpen(false)
                         end
@@ -2301,12 +2301,12 @@ local Library do
             Items["Sync"]:Connect("MouseButton1Down", function()
                 IsSyncToggled = not IsSyncToggled
                 if IsSyncToggled then 
-                    for Index, Value in Library.Colorpickers do 
+                    for Index, Value in pairs(Library.Colorpickers) do 
                         Stash[Value] = Value.Color
                         Value:Set(Colorpicker.Color)
                     end
                 else
-                    for Index, Value in Library.Colorpickers do 
+                    for Index, Value in pairs(Library.Colorpickers) do 
                         if Stash[Value] then
                             Value:Set(Stash[Value])
                         end
@@ -2330,7 +2330,7 @@ local Library do
 
             UpdateSync = function(Bool)
                 if IsSyncToggled and Bool then 
-                    for Index, Value in Library.Colorpickers do 
+                    for Index, Value in pairs(Library.Colorpickers) do 
                         if Value ~= Colorpicker and not StringFind(Value.Flag, "Theme") then
                             Value:Set(Colorpicker.Color, Colorpicker.Alpha)
                         end
@@ -2352,7 +2352,7 @@ local Library do
                 if self.IsOpen then 
                     Items["ColorpickerWindow"].Instance.Position = UDim2New(0, Items["ColorpickerButton"].Instance.AbsolutePosition.X, 0, Items["ColorpickerButton"].Instance.AbsolutePosition.Y + 25)
                 
-                    for Index, Value in Library.OpenFrames do 
+for Index, Value in pairs(Library.OpenFrames) do 
                         if Value ~= self then 
                             Value:SetOpen(false)
                         end
@@ -3752,7 +3752,7 @@ local Library do
 
             local Size = Items["Notification"].Instance.AbsoluteSize
 
-            for Index, Value in Items do 
+            for Index, Value in pairs(Items) do 
                 if Value.Instance:IsA("Frame") then
                     Value.Instance.BackgroundTransparency = 1
                 elseif Value.Instance:IsA("TextLabel") then 
@@ -3763,7 +3763,7 @@ local Library do
             Items["Notification"].Instance.AutomaticSize = Enum.AutomaticSize.Y
 
             Library:Thread(function()
-                for Index, Value in Items do 
+                for Index, Value in pairs(Items) do 
                     if Value.Instance:IsA("Frame") then
                         Value:Tween(nil, {BackgroundTransparency = 0})
                     elseif Value.Instance:IsA("TextLabel") and Index ~= "Description" then 
@@ -3777,7 +3777,7 @@ local Library do
                 Items["Accent"]:Tween(TweenInfo.new(Duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Size = UDim2New(0, 0, 1, 0)})
                 
                 task.delay(Duration + 0.1, function()
-                    for Index, Value in Items do 
+                    for Index, Value in pairs(Items) do 
                         if Value.Instance:IsA("Frame") then
                             Value:Tween(nil, {BackgroundTransparency = 1})
                         elseif Value.Instance:IsA("TextLabel") then 
@@ -4171,7 +4171,7 @@ local Library do
                     Items["UserInfo"].Instance.Visible = false
                     Items["Content"].Instance.Visible = false
 
-                    for Index, Value in Window.Pages do 
+                    for Index, Value in pairs(Window.Pages) do 
                         Value:SetVisibility(false)
                     end
                 else
@@ -4183,7 +4183,7 @@ local Library do
                     Items["UserInfo"].Instance.Visible = true
                     Items["Content"].Instance.Visible = true
 
-                    for Index, Value in Window.Pages do 
+                    for Index, Value in pairs(Window.Pages) do 
                         Value:SetVisibility(true)
                     end
                 end
@@ -4463,7 +4463,7 @@ local Library do
             end
 
             Items["Inactive"]:Connect("MouseButton1Down", function()
-                for Index, Value in Page.Window.Pages do 
+                for Index, Value in pairs(Page.Window.Pages) do 
                     Value:Turn(Value == Page)
                 end
             end)
@@ -4670,7 +4670,7 @@ local Library do
             end
 
             Items["Inactive"]:Connect("MouseButton1Down", function()
-                for Index, Value in Page.Page.SubPagesData do 
+                for Index, Value in pairs(Page.Page.SubPagesData) do 
                     Value:Turn(Value == Page)
                 end
             end)
@@ -5144,7 +5144,7 @@ local Library do
             local ThemingSection = ThemingSubPage:Section({
                 Name = "Theming"
             }) do 
-                for Index, Value in Library.Theme do 
+                for Index, Value in pairs(Library.Theme) do 
                     ThemingSection:Label(Index):Colorpicker({
                         Name = Index,
                         Flag = Index.."Theme",
